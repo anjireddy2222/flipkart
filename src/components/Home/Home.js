@@ -3,7 +3,7 @@ import Nav from "../Nav/Nav";
 const Home = () => {
   return (
     <>
-      <Nav showimagenav={true} showtextnav={false} />
+      <Nav showimagenav={false} showtextnav={true} />
       <br />
       <div className="row">
         <div className="col-lg-5"></div>

@@ -10,7 +10,7 @@ import logo from "../../assets/images/flipkart-logo.png";
 const TopNav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light kart-nav-bar">
-      <div className="container-fluid">
+      <div className="container">
         <a className="navbar-brand" href="#">
           <img className="kart-logo-img" src={logo} alt="" />
         </a>
@@ -44,7 +44,7 @@ const TopNav = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle  top-nav-link"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -61,14 +61,14 @@ const TopNav = () => {
                   <FontAwesomeIcon icon={faSuitcase} /> &nbsp; &nbsp;Sell on
                   Flipkart
                 </a>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item " href="#">
                   24/7 support
                 </a>
               </div>
             </li>
             <li className="nav-item">
               <a
-                className="nav-link"
+                className="nav-link top-nav-link"
                 href="#"
                 tabIndex="-1"
                 aria-disabled="true">
