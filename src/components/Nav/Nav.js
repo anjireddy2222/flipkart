@@ -13,3 +13,5 @@ const Nav = ({ showimagenav, showtextnav }) => {
 };
 
 export default Nav;
+
+
