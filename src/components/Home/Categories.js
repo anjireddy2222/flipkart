@@ -20,7 +20,7 @@ const Categories = () => {
 							<div className='card-body'>
 								<div className='row'>
 									{category.products.map((product, j) => (
-										<div className='col-lg-2 text-center pointer' onClick={(e) => navigateToProduct(product.link)}>
+										<div className='col-lg-2 text-center pointer' key={j} onClick={(e) => navigateToProduct(product.link)}>
 											<div className='cat-single-product-img'>
 												<img className='img-fluid ' src={product.image} alt='' />
 											</div>
