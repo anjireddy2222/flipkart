@@ -1,14 +1,21 @@
 import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getHomePageCategoriesApi } from '../../apis/getHomePagecategories';
 
-const Categories = () => {
+const Categories = ( ) => {
+	
 	const router = useHistory();
 	const [categories, setCategories] = useState(getHomePageCategoriesApi());
-	console.log('categories', categories);
+	
+	const dispatch = useDispatch();
 
 	const navigateToProduct = (link) => {
 		router.push(link);
+	};
+	const addtoCart = (product) => {
+		const action = {type: 'ADD_TO_CART' , data: product};
+		dispatch(action);
 	};
 	return (
 		<div className='container-fluid mb-4'>
@@ -20,7 +27,7 @@ const Categories = () => {
 							<div className='card-body'>
 								<div className='row'>
 									{category.products.map((product, j) => (
-										<div className='col-lg-2 text-center pointer' key={j} onClick={(e) => navigateToProduct(product.link)}>
+										<div className='col-lg-2 text-center pointer' key={j} >
 											<div className='cat-single-product-img'>
 												<img className='img-fluid ' src={product.image} alt='' />
 											</div>
@@ -29,6 +36,10 @@ const Categories = () => {
 												<span className='text-center text-success'>{product.offer}</span>
 												<br />
 												<span className='text-muted'>{product.subText}</span>
+											</div>
+											<div className='add-to-wishlist' onClick={ e => addtoCart(product)}>
+												{' '}
+												Add to Cart
 											</div>
 										</div>
 									))}
@@ -41,5 +52,6 @@ const Categories = () => {
 		</div>
 	);
 };
+
 
 export default Categories;

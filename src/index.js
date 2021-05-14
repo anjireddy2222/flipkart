@@ -7,15 +7,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import $ from "jquery";
 import Popper from "popper.js";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import "./assets/css/global.css";
-// import "bootstrap/js/dist/dropdown";
+import './assets/css/global.css';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+<Provider store={store}>
+
+  <App />
+
+</Provider>
+
+, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

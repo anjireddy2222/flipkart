@@ -9,16 +9,19 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../../assets/images/flipkart-logo.png";
 import cookie from 'react-cookies';
+import { useSelector } from "react-redux";
 
 const TopNav = () => {
 	const [uid, setUid] = useState(cookie.load('uid'));
+
+	const noOfCartItems = useSelector( appData => appData.cartItems.length );
 	
   return (
 		<nav className='navbar navbar-expand-lg navbar-light bg-light kart-nav-bar'>
 			<div className='container'>
-				<a className='navbar-brand' href='#'>
+				<Link className='navbar-brand' to="/" >
 					<img className='kart-logo-img' src={logo} alt='' />
-				</a>
+				</Link>
 				<button
 					className='navbar-toggler'
 					type='button'
@@ -59,8 +62,13 @@ const TopNav = () => {
 						</li>
 						<li className='nav-item'>
 							<a className='nav-link top-nav-link' href='#' tabIndex='-1' aria-disabled='true'>
-								<FontAwesomeIcon icon={faShoppingCart} />
+								<FontAwesomeIcon icon={faShoppingCart} /> { noOfCartItems }
 							</a>
+						</li>
+						<li className='nav-item'>
+							<Link  to='/cart' className='nav-link top-nav-link'>
+								Cart
+							</Link>
 						</li>
 					</ul>
 				</div>
