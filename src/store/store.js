@@ -2,15 +2,21 @@
 import { data } from 'jquery';
 import { createStore } from 'redux';
 
-const appData = localStorage.getItem('appData') == null ? {
-	cartItems: [],
-	wishList: [],
-	userProfie: {},
-	isLoggedIn: false,
-	userId: 0,
-} : JSON.parse(localStorage.getItem('appData'));
+const appData =
+	localStorage.getItem('appData') == null
+		? {
+				cartItems: [],
+				wishList: [],
+				userProfie: {},
+				isLoggedIn: false,
+				userId: 0,
+		  }
+		: JSON.parse(localStorage.getItem('appData'));
 
 const updateMyAppData = (state = appData, action) => {
+	let arrayItems = [...state.cartItems];
+
+	
 	if (action.type == 'UPDATE_USER_ID') {
 		state.userId = action.data;
 	}
@@ -30,28 +36,28 @@ const updateMyAppData = (state = appData, action) => {
 				return product;
 			});
 			if( isNewProduct == true){
-				state.cartItems.push({item: action.data, count: 1});
+				state.cartItems.push({ item: action.data, count: 1 });
 			}
-			
-		
 	}
 
 	if( action.type == "DECREASE_FROM_CART"){
-		state.cartItems.map( product =>{
-			if( product.item.pid == action.data){
+		arrayItems.map((product) => {
+			if (product.item.pid == action.data) {
 				product.count = product.count - 1;
 			}
 			return product;
-		})
+		});
+		state.cartItems = arrayItems;
 	}
 
 	if( action.type == "INCREASE_FROM_CART"){
-		state.cartItems.map( product =>{
-			if( product.item.pid == action.data){
+		arrayItems.map((product) => {
+			if (product.item.pid == action.data) {
 				product.count = product.count + 1;
 			}
 			return product;
 		});
+		state.cartItems = arrayItems;
 	}
 
 	if (action.type == 'REMOVE_FROM_CART') {

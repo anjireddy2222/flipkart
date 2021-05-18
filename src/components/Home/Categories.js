@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getHomePageCategoriesApi } from '../../apis/getHomePagecategories';
 
@@ -7,6 +7,9 @@ const Categories = ( ) => {
 	
 	const router = useHistory();
 	const [categories, setCategories] = useState(getHomePageCategoriesApi());
+
+	const cartItems = useSelector((appData) => appData.cartItems);
+	//const cartLength = useSelector((appData) => appData.cartItems.length);
 	
 	const dispatch = useDispatch();
 
@@ -27,7 +30,7 @@ const Categories = ( ) => {
 							<div className='card-body'>
 								<div className='row'>
 									{category.products.map((product, j) => (
-										<div className='col-lg-2 text-center pointer' key={j} >
+										<div className='col-lg-2 text-center pointer' key={j}>
 											<div className='cat-single-product-img'>
 												<img className='img-fluid ' src={product.image} alt='' />
 											</div>
@@ -37,7 +40,7 @@ const Categories = ( ) => {
 												<br />
 												<span className='text-muted'>{product.subText}</span>
 											</div>
-											<div className='add-to-wishlist' onClick={ e => addtoCart(product)}>
+											<div className='add-to-wishlist' onClick={(e) => addtoCart(product)}>
 												{' '}
 												Add to Cart
 											</div>
@@ -48,6 +51,14 @@ const Categories = ( ) => {
 						</div>
 					</div>
 				))}
+			</div>
+			<div className='row'>
+				<div className='col-lg-12'>
+					
+					{cartItems.map((product) => (
+						<h2>{product.item.title} - { product.count }</h2>
+					))}
+				</div>
 			</div>
 		</div>
 	);
