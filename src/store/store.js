@@ -31,6 +31,8 @@ const updateMyAppData = (state = appData, action) => {
 		}
 	}
 	
+=======
+>>>>>>> Stashed changes
 	if (action.type == 'UPDATE_USER_ID') {
 		state.userId = action.data;
 	}
