@@ -13,9 +13,23 @@ const appData =
 		  }
 		: JSON.parse(localStorage.getItem('appData'));
 
+
 const updateMyAppData = (state = appData, action) => {
 	let arrayItems = [...state.cartItems];
 
+	if (action.type == 'HANDLE_WISHLIST') {
+		let hasProduct = false;
+		state.wishList.map((product) => {
+			if (product.pid == action.data.pid) {
+				hasProduct = true;
+			}
+		});
+		if (hasProduct == false) {
+			state.wishList.push(action.data);
+		} else {
+			state.wishList = state.wishList.filter((product) => product.pid != action.data.pid);
+		}
+	}
 	
 	if (action.type == 'UPDATE_USER_ID') {
 		state.userId = action.data;

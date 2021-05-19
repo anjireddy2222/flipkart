@@ -1,25 +1,32 @@
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getHomePageCategoriesApi } from '../../apis/getHomePagecategories';
 
-const Categories = ( ) => {
-	
+const Categories = () => {
 	const router = useHistory();
 	const [categories, setCategories] = useState(getHomePageCategoriesApi());
 
 	const cartItems = useSelector((appData) => appData.cartItems);
-	//const cartLength = useSelector((appData) => appData.cartItems.length);
+	const wishListItems = useSelector( appData => appData.wishList);
 	
 	const dispatch = useDispatch();
 
 	const navigateToProduct = (link) => {
 		router.push(link);
 	};
-	const addtoCart = (product) => {
-		const action = {type: 'ADD_TO_CART' , data: product};
+	// const addtoCart = (product) => {
+	// 	const action = {type: 'ADD_TO_CART' , data: product};
+	// 	dispatch(action);
+	// };
+	const handleWishList = (product) => {
+		const action = { type:   'HANDLE_WISHLIST', data: product   };
 		dispatch(action);
 	};
+
+
 	return (
 		<div className='container-fluid mb-4'>
 			<div className='row'>
@@ -40,10 +47,21 @@ const Categories = ( ) => {
 												<br />
 												<span className='text-muted'>{product.subText}</span>
 											</div>
-											<div className='add-to-wishlist' onClick={(e) => addtoCart(product)}>
-												{' '}
-												Add to Cart
-											</div>
+											{
+												
+												wishListItems.filter( item => item.pid == product.pid).length == 1 && 
+												<div className='add-to-wishlist text-danger' onClick={(e) => handleWishList(product)}>
+													<FontAwesomeIcon icon={faHeart} />
+												</div>
+											}
+											{
+												wishListItems.filter( item => item.pid == product.pid).length == 0 && 
+												<div className='add-to-wishlist text-secondary' onClick={(e) => handleWishList(product)}>
+													<FontAwesomeIcon icon={faHeart} />
+												</div>
+
+											}
+											
 										</div>
 									))}
 								</div>
@@ -52,17 +70,16 @@ const Categories = ( ) => {
 					</div>
 				))}
 			</div>
-			<div className='row'>
+			{/* <div className='row'>
 				<div className='col-lg-12'>
 					
 					{cartItems.map((product) => (
 						<h2>{product.item.title} - { product.count }</h2>
 					))}
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
-
 
 export default Categories;
