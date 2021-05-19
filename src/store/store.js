@@ -17,6 +17,7 @@ const appData =
 const updateMyAppData = (state = appData, action) => {
 	let arrayItems = [...state.cartItems];
 
+<<<<<<< Updated upstream
 	if (action.type == 'HANDLE_WISHLIST') {
 		let hasProduct = false;
 		state.wishList.map((product) => {
