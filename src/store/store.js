@@ -17,7 +17,6 @@ const appData =
 const updateMyAppData = (state = appData, action) => {
 	let arrayItems = [...state.cartItems];
 
-<<<<<<< Updated upstream
 	if (action.type == 'HANDLE_WISHLIST') {
 		let hasProduct = false;
 		state.wishList.map((product) => {
@@ -31,9 +30,7 @@ const updateMyAppData = (state = appData, action) => {
 			state.wishList = state.wishList.filter((product) => product.pid != action.data.pid);
 		}
 	}
-	
-=======
->>>>>>> Stashed changes
+
 	if (action.type == 'UPDATE_USER_ID') {
 		state.userId = action.data;
 	}
@@ -43,21 +40,20 @@ const updateMyAppData = (state = appData, action) => {
 	}
 
 	if (action.type == 'ADD_TO_CART') {
-		
-			let isNewProduct = true;
-			state.cartItems.map( product =>{
-				if( product.item.pid == action.data.pid){
-					product.count = product.count + 1;
-					isNewProduct = false;
-				}
-				return product;
-			});
-			if( isNewProduct == true){
-				state.cartItems.push({ item: action.data, count: 1 });
+		let isNewProduct = true;
+		state.cartItems.map((product) => {
+			if (product.item.pid == action.data.pid) {
+				product.count = product.count + 1;
+				isNewProduct = false;
 			}
+			return product;
+		});
+		if (isNewProduct == true) {
+			state.cartItems.push({ item: action.data, count: 1 });
+		}
 	}
 
-	if( action.type == "DECREASE_FROM_CART"){
+	if (action.type == 'DECREASE_FROM_CART') {
 		arrayItems.map((product) => {
 			if (product.item.pid == action.data) {
 				product.count = product.count - 1;
@@ -67,7 +63,7 @@ const updateMyAppData = (state = appData, action) => {
 		state.cartItems = arrayItems;
 	}
 
-	if( action.type == "INCREASE_FROM_CART"){
+	if (action.type == 'INCREASE_FROM_CART') {
 		arrayItems.map((product) => {
 			if (product.item.pid == action.data) {
 				product.count = product.count + 1;
