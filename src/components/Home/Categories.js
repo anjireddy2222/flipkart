@@ -8,6 +8,7 @@ import { getHomePageCategoriesApi } from '../../apis/getHomePagecategories';
 const Categories = () => {
 	const router = useHistory();
 	const [categories, setCategories] = useState(getHomePageCategoriesApi());
+	
 
 	const cartItems = useSelector((appData) => appData.cartItems);
 	const wishListItems = useSelector( appData => appData.wishList);
@@ -17,14 +18,28 @@ const Categories = () => {
 	const navigateToProduct = (link) => {
 		router.push(link);
 	};
-	// const addtoCart = (product) => {
-	// 	const action = {type: 'ADD_TO_CART' , data: product};
-	// 	dispatch(action);
-	// };
-	const handleWishList = (product) => {
-		const action = { type:   'HANDLE_WISHLIST', data: product   };
+
+	const handleWishList = (product, id) => {
+		// change heart icon color
+		let parentDiv = document.getElementById(id);
+		const matchedproducts = wishListItems.filter((item) => item.pid == product.pid);
+		const length = matchedproducts.length;
+		
+		length == 1 ? parentDiv.setAttribute('class', 'add-to-wishlist text-secondary') 
+		: parentDiv.setAttribute('class', 'add-to-wishlist text-danger')
+		// redux action
+		const action = { type: 'HANDLE_WISHLIST', data: product };
 		dispatch(action);
 	};
+
+	const getClassNames = (product) =>{
+		const length = wishListItems.filter((item) => item.pid == product.pid).length;
+		if( length == 1){
+			return "add-to-wishlist text-danger";
+		}else{
+			return "add-to-wishlist text-secondary";
+		}
+	}
 
 
 	return (
@@ -47,20 +62,10 @@ const Categories = () => {
 												<br />
 												<span className='text-muted'>{product.subText}</span>
 											</div>
-											{
-												
-												wishListItems.filter( item => item.pid == product.pid).length == 1 && 
-												<div className='add-to-wishlist text-danger' onClick={(e) => handleWishList(product)}>
-													<FontAwesomeIcon icon={faHeart} />
+											
+												<div className={getClassNames(product)} id={i+"a"+j} >
+													<FontAwesomeIcon icon={faHeart} onClick={(e) =>handleWishList(product, i+"a"+j)} />
 												</div>
-											}
-											{
-												wishListItems.filter( item => item.pid == product.pid).length == 0 && 
-												<div className='add-to-wishlist text-secondary' onClick={(e) => handleWishList(product)}>
-													<FontAwesomeIcon icon={faHeart} />
-												</div>
-
-											}
 											
 										</div>
 									))}
