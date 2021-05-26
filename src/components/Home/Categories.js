@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom';
 import { getHomePageCategoriesApi } from '../../apis/getHomePagecategories';
 
 const Categories = () => {
+
+	const history = useHistory();
 	const router = useHistory();
 	const [categories, setCategories] = useState(getHomePageCategoriesApi());
 	
@@ -41,6 +43,10 @@ const Categories = () => {
 		}
 	}
 
+	const gotoProduct = (productId) => {
+		history.push('product-details?pid=' + productId);
+	};
+
 
 	return (
 		<div className='container-fluid mb-4'>
@@ -52,7 +58,7 @@ const Categories = () => {
 							<div className='card-body'>
 								<div className='row'>
 									{category.products.map((product, j) => (
-										<div className='col-lg-2 text-center pointer' key={j}>
+										<div className='col-lg-2 text-center pointer' key={j} onClick={(e) => gotoProduct(product.pid)}>
 											<div className='cat-single-product-img'>
 												<img className='img-fluid ' src={product.image} alt='' />
 											</div>
@@ -62,11 +68,10 @@ const Categories = () => {
 												<br />
 												<span className='text-muted'>{product.subText}</span>
 											</div>
-											
-												<div className={getClassNames(product)} id={i+"a"+j} >
-													<FontAwesomeIcon icon={faHeart} onClick={(e) =>handleWishList(product, i+"a"+j)} />
-												</div>
-											
+
+											<div className={getClassNames(product)} id={i + 'a' + j}>
+												<FontAwesomeIcon icon={faHeart} onClick={(e) => handleWishList(product, i + 'a' + j)} />
+											</div>
 										</div>
 									))}
 								</div>
