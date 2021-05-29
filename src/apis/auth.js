@@ -13,6 +13,6 @@ export const validateEmailApi = (email, userId) => {
 	form.append('userId', userId);
 
 	let headers = { authorization: 'Bearer ' + localStorage.getItem('token') };
-
+	// test comment
 	return axios.post('http://localhost:3030/newping/checkEmailExists', form, { headers: headers });
 };
