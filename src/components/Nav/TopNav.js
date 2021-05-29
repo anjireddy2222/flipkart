@@ -65,6 +65,7 @@ const TopNav = () => {
 									24/7 support
 								</a>
 								<Link to={'/profile?uid=' + uid}>Profile</Link>
+								<Link to='/validate'>Validate</Link>
 							</div>
 						</li>
 						<li className='nav-item'>
