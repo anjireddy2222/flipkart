@@ -1,10 +1,12 @@
-import axios from 'axios';
+import { getCustomAxios } from './axios';
+
+const axios = getCustomAxios();
 
 export const loginApi = (email, pword) => {
 	let form = new FormData();
 	form.append('email', email);
 	form.append('password', pword);
-	return axios.post('http://localhost:3030/auth/login', form);
+	return axios.post('/auth/login', form);
 };
 
 export const validateEmailApi = (email, userId) => {
@@ -12,7 +14,7 @@ export const validateEmailApi = (email, userId) => {
 	form.append('email', email);
 	form.append('userId', userId);
 
-	let headers = { authorization: 'Bearer ' + localStorage.getItem('token') };
+	//let headers = { authorization: 'Bearer ' + localStorage.getItem('token') };
 	// test comment
-	return axios.post('http://localhost:3030/newping/checkEmailExists', form, { headers: headers });
+	return axios.post('/newping/checkEmailExists', form);
 };

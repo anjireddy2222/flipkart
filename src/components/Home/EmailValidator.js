@@ -8,7 +8,10 @@ const EmailValidator = () => {
 	const checkEmail = () => {
 		let userId = localStorage.getItem('userId');
 		validateEmailApi(email, userId).then((response) => {
-			console.log(response);
+			//console.log(response.headers['token']);
+			if (response.headers['token'] != undefined) {
+				localStorage.setItem('token', response.headers['token']);
+			}
 		});
 	};
 

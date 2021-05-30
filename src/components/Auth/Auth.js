@@ -9,7 +9,7 @@ const Auth = () => {
 	const [msg, setMsg] = useState('');
 
 	const handleLogin = () => {
-		console.log(email, pword);
+		//console.log(email, pword);
 		loginApi(email, pword).then((response) => {
 			if (response.data.result == 'SUCCESS') {
 				localStorage.setItem('userId', response.data.data.userId);

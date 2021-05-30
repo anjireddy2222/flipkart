@@ -1,4 +1,6 @@
-import axios from 'axios';
+import { getCustomAxios } from './axios';
+
+const axios = getCustomAxios();
 
 export const updatePaymentDetailsApi = (pid, userId, price, payment_id) => {
 	// let fomr = new FormData();
