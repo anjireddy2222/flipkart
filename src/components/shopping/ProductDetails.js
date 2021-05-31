@@ -8,6 +8,8 @@ import { useHistory } from 'react-router';
 const ProductDetails = () => {
 	let history = useHistory();
 	let params = queryString.parse(window.location.search);
+	console.log("this",params);
+
 	const [product, setProduct] = useState({});
 
 	useEffect(() => {
