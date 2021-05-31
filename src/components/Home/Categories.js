@@ -22,16 +22,20 @@ const Categories = () => {
 	};
 
 	const handleWishList = (product, id) => {
-		// change heart icon color
-		let parentDiv = document.getElementById(id);
-		const matchedproducts = wishListItems.filter((item) => item.pid == product.pid);
-		const length = matchedproducts.length;
-		
-		length == 1 ? parentDiv.setAttribute('class', 'add-to-wishlist text-secondary') 
-		: parentDiv.setAttribute('class', 'add-to-wishlist text-danger')
-		// redux action
-		const action = { type: 'HANDLE_WISHLIST', data: product };
-		dispatch(action);
+		try{
+			// change heart icon color
+			let parentDiv = document.getElementById(id);
+			const matchedproducts = wishListItems.filter((item) => item.pid == product.pid);
+			const length = matchedproducts.length;
+			
+			length == 1 ? parentDiv.setAttribute('class', 'add-to-wishlist text-secondary') 
+			: parentDiv.setAttribute('class', 'add-to-wishlist text-danger')
+			// redux action
+			const action = { type: 'HANDLE_WISHLIST', data: product };
+			dispatch(action);
+		}catch(err){
+			console.log(err.message);
+		}
 	};
 
 	const getClassNames = (product) =>{

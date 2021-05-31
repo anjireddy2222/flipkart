@@ -25,7 +25,7 @@ const ProductDetails = () => {
 	const handlePayment = () => {
 		// prcie product.price // pid priduct.pid // userId from localStorage
 		const options = {
-			key: 'rzp_live_KQwjVNVEq2LTTz', // Enter the Key ID generated from the Dashboard
+			key: 'rzp_live_KQwjVNVEq2LTTz', // Enter the Key ID generated from the payment gateway's dashboard
 			amount: 100,
 			description: product.title,
 			handler: async function (response) {

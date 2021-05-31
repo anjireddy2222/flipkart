@@ -15,68 +15,83 @@ const appData =
 
 
 const updateMyAppData = (state = appData, action) => {
-	let arrayItems = [...state.cartItems];
+	console.log(state.cartItems);
+	
 
-	if (action.type == 'HANDLE_WISHLIST') {
-		let hasProduct = false;
-		state.wishList.map((product) => {
-			if (product.pid == action.data.pid) {
-				hasProduct = true;
+	try{
+		let arrayItems = [...state.cartItems];
+		if (action.type == 'HANDLE_WISHLIST') {
+			let hasProduct = false;
+			state.wishList.map((product) => {
+				if (product.pid == action.data.pid) {
+					hasProduct = true;
+				}
+			});
+			if (hasProduct == false) {
+				state.wishList.push(action.data);
+			} else {
+				state.wishList = state.wishList.filter((product) => product.pid != action.data.pid);
 			}
-		});
-		if (hasProduct == false) {
+		}
+	
+		if (action.type == 'UPDATE_USER_ID') {
+			state.userId = action.data;
+		}
+	
+		if (action.type == 'ADD_TO_WISHLIST') {
 			state.wishList.push(action.data);
-		} else {
-			state.wishList = state.wishList.filter((product) => product.pid != action.data.pid);
 		}
-	}
-
-	if (action.type == 'UPDATE_USER_ID') {
-		state.userId = action.data;
-	}
-
-	if (action.type == 'ADD_TO_WISHLIST') {
-		state.wishList.push(action.data);
-	}
-
-	if (action.type == 'ADD_TO_CART') {
-		let isNewProduct = true;
-		state.cartItems.map((product) => {
-			if (product.item.pid == action.data.pid) {
-				product.count = product.count + 1;
-				isNewProduct = false;
+	
+		if (action.type == 'ADD_TO_CART') {
+			let isNewProduct = true;
+			state.cartItems.map((product) => {
+				if (product.item.pid == action.data.pid) {
+					product.count = product.count + 1;
+					isNewProduct = false;
+				}
+				return product;
+			});
+			if (isNewProduct == true) {
+				state.cartItems.push({ item: action.data, count: 1 });
 			}
-			return product;
-		});
-		if (isNewProduct == true) {
-			state.cartItems.push({ item: action.data, count: 1 });
 		}
+	
+		if (action.type == 'DECREASE_FROM_CART') {
+			arrayItems.map((product) => {
+				if (product.item.pid == action.data) {
+					product.count = product.count - 1;
+				}
+				return product;
+			});
+			state.cartItems = arrayItems;
+		}
+	
+		if (action.type == 'INCREASE_FROM_CART') {
+			arrayItems.map((product) => {
+				if (product.item.pid == action.data) {
+					product.count = product.count + 1;
+				}
+				return product;
+			});
+			state.cartItems = arrayItems;
+		}
+	
+		if (action.type == 'REMOVE_FROM_CART') {
+			state.cartItems = state.cartItems.filter((item) => item.title != action.data);
+		}
+	
+
+	}catch(error){
+		state ={
+			cartItems: [],
+			wishList: [],
+			userProfie: {},
+			isLoggedIn: false,
+			userId: 0,
+	  }
 	}
 
-	if (action.type == 'DECREASE_FROM_CART') {
-		arrayItems.map((product) => {
-			if (product.item.pid == action.data) {
-				product.count = product.count - 1;
-			}
-			return product;
-		});
-		state.cartItems = arrayItems;
-	}
-
-	if (action.type == 'INCREASE_FROM_CART') {
-		arrayItems.map((product) => {
-			if (product.item.pid == action.data) {
-				product.count = product.count + 1;
-			}
-			return product;
-		});
-		state.cartItems = arrayItems;
-	}
-
-	if (action.type == 'REMOVE_FROM_CART') {
-		state.cartItems = state.cartItems.filter((item) => item.title != action.data);
-	}
-
+	
 	return state;
 };
 

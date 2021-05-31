@@ -10,6 +10,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import './assets/css/global.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
 
