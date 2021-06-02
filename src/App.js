@@ -6,6 +6,7 @@ import Cart from './components/shopping/cart';
 import ProductDetails from './components/shopping/ProductDetails';
 import Auth from './components/Auth/Auth';
 import EmailValidator from './components/Home/EmailValidator';
+import Notify from './components/Notifications/Notify';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
 				<Route exact path='/product-details' component={ProductDetails} />
 				<Route exact path='/auth' component={Auth} />
 				<Route exact path='/validate' component={EmailValidator} />
+				<Route exact path='/notify' component={Notify} />
 			</Switch>
 		</BrowserRouter>
 	);
