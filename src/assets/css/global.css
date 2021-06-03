@@ -73,3 +73,21 @@ left:auto;
     padding: 3px;
     z-index:99999;
 }
+
+.react-tagsinput-tag {
+    background-color: #fff !important;
+    color: #000 !important;
+    border-radius: 18px !important;
+    border-color: #ccc !important;
+    font-family: inherit !important;
+  }
+  
+  .react-tagsinput--focused {
+    border-color: #ccc !important;
+  }
+  .react-tagsinput-input{
+    color:#000 !important;
+    width:100% !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+  }
