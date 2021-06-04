@@ -8,6 +8,7 @@ import Auth from './components/Auth/Auth';
 import EmailValidator from './components/Home/EmailValidator';
 import Notify from './components/Notifications/Notify';
 import Post from './components/Post/Post';
+import MapComp from './components/Map/Map';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
 				<Route exact path='/validate' component={EmailValidator} />
 				<Route exact path='/notify' component={Notify} />
 				<Route exact path='/post' component={Post} />
+				<Route exact path='/map' component={MapComp} />
 			</Switch>
 		</BrowserRouter>
 	);

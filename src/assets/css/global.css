@@ -91,3 +91,6 @@ left:auto;
     font-family: inherit !important;
     font-size: inherit !important;
   }
+.map{
+    height:60vh;
+}
