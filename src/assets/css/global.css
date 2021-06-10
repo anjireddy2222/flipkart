@@ -94,3 +94,7 @@ left:auto;
 .map{
     height:60vh;
 }
+.infowindow{
+    display: block;
+    visibility: visible;
+}

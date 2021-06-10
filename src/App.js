@@ -9,6 +9,7 @@ import EmailValidator from './components/Home/EmailValidator';
 import Notify from './components/Notifications/Notify';
 import Post from './components/Post/Post';
 import MapComp from './components/Map/Map';
+import DateTime from './components/Date';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 				<Route exact path='/notify' component={Notify} />
 				<Route exact path='/post' component={Post} />
 				<Route exact path='/map' component={MapComp} />
+				<Route exact match='/date' component={DateTime} />
 			</Switch>
 		</BrowserRouter>
 	);

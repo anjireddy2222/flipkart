@@ -1,8 +1,8 @@
-import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
+import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react';
 import { useState } from 'react';
 
 const MapComp = (props) => {
-	console.log(props);
+	//console.log(props);
 
 	const [center, setCenter] = useState({ lat: 20.5937, lng: 78.9629 });
 	const [bounds, setBounds] = useState(new props.google.maps.LatLngBounds());
@@ -24,6 +24,19 @@ const MapComp = (props) => {
 	const onMarkerDragged = (props, marker, e) => {
 		//setCenter({ lat: e.latLng.lat(), lng: e.latLng.lng() });
 	};
+	const [showWindow, setShowWindow] = useState(false);
+	const [activeMarker, setactiveMarker] = useState(null);
+
+	const markerClicked = (props, marker, e) =>{
+		console.log(activeMarker, marker);
+		setactiveMarker(marker);
+		setShowWindow(true)
+	}
+
+	const windowClosed = () =>{
+		setactiveMarker(null);
+		setShowWindow(false);
+	}
 
 	return (
 		<div className='container'>
@@ -42,13 +55,18 @@ const MapComp = (props) => {
 								position={center}
 								draggable={true}
 								onDragend={onMarkerDragged}
-							/>
-							<Marker
-								title={'The marker`s title will appear as a tooltip.'}
-								name={'SOMA'}
-								draggable={true}
-								position={{ lat: 17.37174731189148, lng: 78.5208202389444 }}
-							/>
+								onClick={markerClicked}
+								>
+								</Marker>
+
+								<InfoWindow
+								marker={activeMarker}
+								visible={showWindow}
+								onClick={windowClosed}>
+									<div className="infowindow">
+									<h1>Hderabad</h1>
+									</div>
+								</InfoWindow>
 						</Map>
 					</div>
 				</div>
