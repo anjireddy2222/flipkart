@@ -18,3 +18,4 @@ export const validateEmailApi = (email, userId) => {
 	// test comment
 	return axios.post('/newping/checkEmailExists', form);
 };
+ 
