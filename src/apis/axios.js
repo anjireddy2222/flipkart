@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getCustomAxios = () => {
 	const customAxios = axios.create({
-		baseURL: 'http://backend.joinping.com:3030',
+		baseURL: 'https://www.backend.joinping.co',
 	});
 
 	customAxios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');

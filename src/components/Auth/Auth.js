@@ -28,7 +28,7 @@ const Auth = () => {
 			let response = await loginApi(email, pword);
 			localStorage.setItem('userId', response.data.data.userId);
 			localStorage.setItem('token', response.data.data.token);
-			localStorage.setItem('userName', response.data.data.userName);
+			localStorage.setItem('userName', response.data.data.name);
 			history.push('/');
 			console.log(response.data);
 		} catch (err) {

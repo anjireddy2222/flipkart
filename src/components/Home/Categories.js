@@ -21,19 +21,21 @@ const Categories = () => {
 		router.push(link);
 	};
 
-	const handleWishList = (product, id) => {
-		try{
+	const handleWishList = (e, product, id) => {
+		try {
 			// change heart icon color
+			e.preventDefault();
 			let parentDiv = document.getElementById(id);
 			const matchedproducts = wishListItems.filter((item) => item.pid == product.pid);
 			const length = matchedproducts.length;
-			
-			length == 1 ? parentDiv.setAttribute('class', 'add-to-wishlist text-secondary') 
-			: parentDiv.setAttribute('class', 'add-to-wishlist text-danger')
+
+			length == 1
+				? parentDiv.setAttribute('class', 'add-to-wishlist text-secondary')
+				: parentDiv.setAttribute('class', 'add-to-wishlist text-danger');
 			// redux action
 			const action = { type: 'HANDLE_WISHLIST', data: product };
 			dispatch(action);
-		}catch(err){
+		} catch (err) {
 			console.log(err.message);
 		}
 	};
@@ -62,19 +64,20 @@ const Categories = () => {
 							<div className='card-body'>
 								<div className='row'>
 									{category.products.map((product, j) => (
-										<div className='col-lg-2 text-center pointer' key={j} onClick={(e) => gotoProduct(product.pid)}>
-											<div className='cat-single-product-img'>
-												<img className='img-fluid ' src={product.image} alt='' />
+										<div  key={j} className='col-lg-2 text-center pointer'  >
+											<div onClick={(e) => gotoProduct(product.pid)}>
+												<div className='cat-single-product-img'>
+													<img className='img-fluid ' src={product.image} alt='' />
+												</div>
+												<h6>{product.title}</h6>
+												<div>
+													<span className='text-center text-success'>{product.offer}</span>
+													<br />
+													<span className='text-muted'>{product.subText}</span>
+												</div>										
 											</div>
-											<h6>{product.title}</h6>
-											<div>
-												<span className='text-center text-success'>{product.offer}</span>
-												<br />
-												<span className='text-muted'>{product.subText}</span>
-											</div>
-
 											<div className={getClassNames(product)} id={i + 'a' + j}>
-												<FontAwesomeIcon icon={faHeart} onClick={(e) => handleWishList(product, i + 'a' + j)} />
+												<FontAwesomeIcon icon={faHeart} onClick={(e) => handleWishList(e, product, i + 'a' + j)} />
 											</div>
 										</div>
 									))}
