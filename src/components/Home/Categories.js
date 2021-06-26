@@ -33,7 +33,7 @@ const Categories = () => {
 				? parentDiv.setAttribute('class', 'add-to-wishlist text-secondary')
 				: parentDiv.setAttribute('class', 'add-to-wishlist text-danger');
 			// redux action
-			const action = { type: 'HANDLE_WISHLIST', data: product };
+			const action = { type: 'ADD_TO_CART', data: product };
 			dispatch(action);
 		} catch (err) {
 			console.log(err.message);
